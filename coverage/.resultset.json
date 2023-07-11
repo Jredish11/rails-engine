@@ -181,8 +181,9 @@
         "lines": [
           1,
           1,
-          1,
-          1,
+          21,
+          21,
+          21,
           1,
           null,
           null
@@ -192,7 +193,7 @@
         "lines": [
           1,
           1,
-          21,
+          2,
           null,
           null
         ]
@@ -200,6 +201,11 @@
       "/Users/jeffreyredish/turing/3mod/projects/rails-engine/config/routes.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
           1,
           1,
           1,
@@ -214,6 +220,7 @@
       "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/models/merchant.rb": {
         "lines": [
           1,
+          1,
           null,
           null
         ]
@@ -225,7 +232,16 @@
           null
         ]
       },
-      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
           1,
@@ -239,8 +255,18 @@
           1,
           null
         ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/serializers/item_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1689099874
+    "timestamp": 1689110767
   }
 }
