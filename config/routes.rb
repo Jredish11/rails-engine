@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :merchants, only: [:index]
+      resources :merchants, only: [:index, :show]
     end
   end
   namespace :api do
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :items, only: [:index]
     end
   end
+
   
   # Defines the root path route ("/")
   # root "articles#index"
