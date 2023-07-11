@@ -25,5 +25,27 @@ RSpec.describe "Merchants API" do
       end
     end
   end
+
+  describe "GET /api/v1/merchants/{{merchant_id}}" do
+    it "can get one merchant by its id" do
+      merch_id = create(:merchant).id.to_s
+      
+      get "/api/v1/merchants/#{merch_id}"
+
+      merchant = JSON.parse(response.body, symbolize_names: true)
+
+      expect(merchant[:data]).to have_key(:id)
+      expect(merchant[:data][:id]).to eq(merch_id)
+      
+      expect(merchant[:data]).to have_key(:type)
+      expect(merchant[:data][:type]).to be_a(String)
+
+      expect(merchant[:data]).to have_key(:attributes)
+      expect(merchant[:data][:attributes]).to be_a(Hash)
+
+      expect(merchant[:data][:attributes]).to have_key(:name)
+      expect(merchant[:data][:attributes][:name]).to be_a(String)
+    end
+  end
 end
  
