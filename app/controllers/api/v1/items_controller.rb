@@ -6,4 +6,53 @@ class Api::V1::ItemsController < ApplicationController
   def show
     render(json: ItemSerializer.new(Item.find(params[:id])))
   end
+
+  def create
+    item = Item.create(item_params)
+    if item.save
+      render(json: ItemSerializer.new(Item.create(item_params)), status: :created)
+    end
+  end
+
+  def update
+    item = Item.update(params[:id], item_params)
+    if item.save
+      render(json: ItemSerializer.new(Item.update(params[:id], item_params)))
+    else
+      render :status => 404
+    end
+  end
+    # item = Item.find_by(id: params[:id])
+    
+    # if item.nil?
+    #   render(:status => 404)
+    # elsif item.update(item_params)
+    #   render(json: ItemSerializer.new(item))
+    # else
+    #   render(json: { status: :unprocessable_entity }) 
+    # end
+
+  #   item = Item.update(params[:id], item_params)
+  #   if !item.id.nil? && item.save
+  #     render(json: ItemSerializer.new(Item.update(params[:id], item_params)))
+  #   else
+  #     render :status => 404
+  #   end
+  # end
+
+  def destroy
+    item = Item.last
+    if item.nil?
+      render(status: :not_found)
+    else
+      item.destroy
+      head :no_content
+    end
+  end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
+  end
 end
