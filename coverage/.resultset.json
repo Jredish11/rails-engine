@@ -181,9 +181,9 @@
         "lines": [
           1,
           1,
-          5,
-          5,
-          5,
+          25,
+          25,
+          25,
           1,
           null,
           null
@@ -193,7 +193,7 @@
         "lines": [
           1,
           1,
-          23,
+          24,
           null,
           null
         ]
@@ -220,6 +220,102 @@
           null
         ]
       },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/spec/requests/api/v1/merchants_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          20,
+          20,
+          null,
+          20,
+          20,
+          null,
+          20,
+          20,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          4,
+          4,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/models/merchant.rb": {
         "lines": [
           1,
@@ -232,6 +328,39 @@
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/controllers/api/v1/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/serializers/item_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -248,26 +377,11 @@
           null
         ]
       },
-      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
       "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
         "lines": [
           1,
           1,
           1,
-          null,
-          null
-        ]
-      },
-      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          null,
           null,
           null
         ]
@@ -280,17 +394,8 @@
           null,
           null
         ]
-      },
-      "/Users/jeffreyredish/turing/3mod/projects/rails-engine/app/serializers/item_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
       }
     },
-    "timestamp": 1689127230
+    "timestamp": 1689171891
   }
 }
