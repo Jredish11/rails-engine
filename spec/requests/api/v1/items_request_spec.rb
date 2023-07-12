@@ -13,7 +13,6 @@ RSpec.describe "Items API" do
       
       items = JSON.parse(response.body, symbolize_names: true)
       expect(items[:data].count).to eq(20)
-
       items[:data].each do |item|
         expect(item).to have_key(:id)
         expect(item[:id]).to be_an(String)
@@ -43,7 +42,7 @@ RSpec.describe "Items API" do
         get "/api/v1/items/#{item_id.id}"
 
         expect(response).to be_successful
-
+        
         item = JSON.parse(response.body, symbolize_names: true)
 
         expect(item).to have_key(:data)
@@ -72,6 +71,89 @@ RSpec.describe "Items API" do
         expect(item[:data][:attributes]).to have_key(:merchant_id)
         expect(item[:data][:attributes][:merchant_id]).to be_a(Integer)
         expect(item[:data][:attributes][:merchant_id]).to eq(merchant.id)
+      end
+    end
+
+    describe "POST /api/v1/items" do
+      it "can create a new item" do
+        merchant = create(:merchant)
+        item_params = { name: "burger", 
+                        description: "juicy", 
+                        unit_price: 12.34, 
+                        merchant_id: merchant.id 
+                      }
+                      headers = {"CONTENT_TYPE" => "application/json"}
+
+        post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+        
+        created_item = Item.last
+        
+        expect(response).to be_successful
+        expect(created_item.name).to eq(item_params[:name])
+        expect(created_item.description).to eq(item_params[:description])
+        expect(created_item.unit_price).to eq(item_params[:unit_price])
+        expect(created_item.merchant_id).to eq(item_params[:merchant_id])
+      end
+    end
+
+    describe "PATCH /api/v1/items/{{item_id}}" do
+      it "can update an existing item" do
+        merchant = create(:merchant)
+        item_id = create(:item, merchant_id: merchant.id).id
+
+        last_name = Item.last.name
+
+        item_params = { name: "burger", 
+                        description: "juicy", 
+                        unit_price: 12.34, 
+                        merchant_id: merchant.id 
+                      }
+        headers = {"CONTENT_TYPE" => "application/json"}
+
+        patch "/api/v1/items/#{item_id}", headers: headers, params: JSON.generate({item: item_params})
+        item = Item.find_by(id: item_id)
+
+        expect(response).to be_successful
+        expect(item.name).to_not eq(last_name)
+        expect(item.name).to eq("burger")
+      end
+
+      xit "returns 404 error if item is not found" do
+        merchant = create(:merchant)
+        item_id1 = create(:item, merchant_id: merchant.id).id
+
+        item_params = { name: "burger", 
+                        description: "juicy", 
+                        unit_price: 12.34, 
+                        merchant_id: merchant.id 
+                      }
+        headers = {"CONTENT_TYPE" => "application/json"}
+        item_id = 12345
+
+        patch "/api/v1/items/#{item_id}", headers: headers, params: JSON.generate({item: item_params})
+
+        expect(response.status).to eq(404)
+      end
+    end
+
+    describe "DELETE /api/v1/items" do
+      it "can delete an item that exists" do
+        merchant = create(:merchant)
+        item = create(:item, merchant_id: merchant.id)
+
+        expect(Item.count).to eq(1)
+
+        delete "/api/v1/items"
+
+        expect(response.status).to eq(204)
+        expect(Item.count).to eq(0)
+        expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "returns a 404 error if item is not found" do
+        delete "/api/v1/items"
+    
+        expect(response.status).to eq(404)
       end
     end
   end
