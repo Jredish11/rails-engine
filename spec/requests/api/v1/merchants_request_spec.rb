@@ -84,6 +84,7 @@ RSpec.describe "Merchants API" do
         expect(merchant[:attributes][:unit_price]).to be_a(Float)
 
         expect(merchant[:attributes]).to have_key(:merchant_id)
+        expect(merchant[:attributes][:merchant_id]).to be_a(Integer)
         expect(merchant[:attributes][:merchant_id]).to eq(merchant_1.id)
       end
     end
