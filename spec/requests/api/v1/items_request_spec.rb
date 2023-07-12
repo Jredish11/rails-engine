@@ -7,7 +7,7 @@ RSpec.describe "Items API" do
       create_list(:item, 20, merchant_id: merchant.id)
 
       
-      get "/api/v1/items"
+      get api_v1_items_path
       
       expect(response).to be_successful
       
@@ -32,6 +32,12 @@ RSpec.describe "Items API" do
 
         expect(item[:attributes]).to have_key(:merchant_id)
         expect(item[:attributes][:merchant_id]).to eq(merchant.id)
+      end
+    end
+
+    describe "GET /api/v1/items/{{item_id}}" do
+      it "can get one item by its id" do
+
       end
     end
   end

@@ -5,7 +5,7 @@ RSpec.describe "Merchants API" do
     it "sends a list of all merchants" do
       create_list(:merchant, 20)
 
-      get "/api/v1/merchants"
+      get api_v1_merchants_path
 
       expect(response).to be_successful
 
@@ -30,7 +30,7 @@ RSpec.describe "Merchants API" do
     it "can get one merchant by its id" do
       merch_id = create(:merchant).id.to_s
       
-      get "/api/v1/merchants/#{merch_id}"
+      get api_v1_merchant_path(merch_id) 
 
       expect(response).to be_successful
 
@@ -55,7 +55,7 @@ RSpec.describe "Merchants API" do
       merchant_1 = create(:merchant)
       create_list(:item, 4, merchant_id: merchant_1.id)
       
-      get "/api/v1/merchants/#{merchant_1.id}/items"
+      get api_v1_merchant_items_path(merchant_1)
 
       expect(response).to be_successful
       
