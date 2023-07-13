@@ -89,5 +89,37 @@ RSpec.describe "Merchants API" do
       end
     end
   end
+
+  describe "GET /api/v1/merchants/find_all?name=ILL" do
+    it "finds all merchants which match a search" do
+      list = create_list(:merchant, 20, name: "ill")
+      other_merchs = create_list(:merchant, 10)
+      
+      get "/api/v1/merchants/find_all?name=ILL"
+      
+      merchants = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to be_successful
+      expect(merchants).to be_a(Hash)
+      expect(merchants).to have_key(:data)
+      expect(merchants[:data]).to be_a(Array)
+
+      merchants[:data].each do |merchant|
+        expect(merchant).to be_a(Hash)
+        expect(merchant).to have_key(:id)
+        expect(merchant[:id].to_i).to be_a(Integer)
+
+        expect(merchant).to have_key(:type)
+        expect(merchant[:type]).to be_a(String)
+
+        expect(merchant).to have_key(:attributes)
+        expect(merchant[:attributes]).to be_a(Hash)
+        expect(merchant[:attributes]).to have_key(:name)
+
+        expect(merchant[:attributes][:name]).to be_a(String)
+        expect(merchant[:attributes][:name]).to eq(list.last.name)
+      end
+    end
+  end
 end
  
