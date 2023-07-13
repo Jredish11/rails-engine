@@ -15,7 +15,7 @@ RSpec.describe "Items API" do
       expect(items[:data].count).to eq(20)
       items[:data].each do |item|
         expect(item).to have_key(:id)
-        expect(item[:id]).to be_an(String)
+        expect(item[:id].to_i).to be_an(Integer)
         
         expect(item).to have_key(:type)
         expect(item[:type]).to be_an(String)
@@ -49,7 +49,7 @@ RSpec.describe "Items API" do
         expect(item[:data]).to be_a(Hash)
 
         expect(item[:data]).to have_key(:id)
-        expect(item[:data][:id]).to be_a(String)
+        expect(item[:data][:id].to_i).to be_a(Integer)
 
         expect(item[:data]).to have_key(:type)
         expect(item[:data][:type]).to be_a(String)
