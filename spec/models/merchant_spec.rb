@@ -1,7 +1,7 @@
 # require 'rails_helper'
 
-# RSpec.describe Item do
+# RSpec.describe Merchant do
 #   describe "Relationships" do
-#     it { should belong_to(:merchant)}
+#     it { should have_many(:items)}
 #   end
 # end
