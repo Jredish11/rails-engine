@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
-      resources :items, only: [:index, :show, :create, :update]
-      delete "/items", to: "items#destroy"
+      resources :items, only: [:index, :show, :create, :update, :destroy]
     end
   end
 
