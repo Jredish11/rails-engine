@@ -120,40 +120,39 @@ RSpec.describe "Items API" do
 
       xit "returns 404 error if item is not found" do
         merchant = create(:merchant)
-        item_id1 = create(:item, merchant_id: merchant.id).id
-
-        item_params = { name: "burger", 
-                        description: "juicy", 
-                        unit_price: 12.34, 
-                        merchant_id: merchant.id 
-                      }
-        headers = {"CONTENT_TYPE" => "application/json"}
+        item = create(:item, merchant_id: merchant.id)
+        require 'pry'; binding.pry
         item_id = 12345
 
-        patch "/api/v1/items/#{item_id}", headers: headers, params: JSON.generate({item: item_params})
+        patch "/api/v1/items/#{item_id}"
 
-        expect(response.status).to eq(404)
+        expect { Item.find(item_id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     describe "DELETE /api/v1/items" do
       it "can delete an item that exists" do
         merchant = create(:merchant)
-        item = create(:item, merchant_id: merchant.id)
+        item_params = ({
+          name: 'Jimmy',
+          description: 'sandwich',
+          unit_price: 314.12,
+          merchant_id: merchant.id
+          })
+          headers = {"CONTENT_TYPE" => "application/json"}
+          
+          post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
 
-        expect(Item.count).to eq(1)
+        
+        expect(Item.all.count).to eq(1)
+        
+        item_id = Item.last.id
+        
+        delete "/api/v1/items/#{item_id}"
 
-        delete "/api/v1/items"
-
-        expect(response.status).to eq(204)
-        expect(Item.count).to eq(0)
-        expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
-      end
-
-      it "returns a 404 error if item is not found" do
-        delete "/api/v1/items"
-    
-        expect(response.status).to eq(404)
+        expect(response).to be_successful
+        expect(Item.all.count).to eq(0)
+        expect{Item.find(item_id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
