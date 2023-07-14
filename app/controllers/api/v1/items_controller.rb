@@ -22,7 +22,7 @@ class Api::V1::ItemsController < ApplicationController
       render(json: ItemSerializer.new(Item.update(params[:id], item_params)))
     else
       render json: JSON.generate({error: 'error'}), status: 400
-    end
+    end 
   end
 
   def destroy
@@ -30,6 +30,15 @@ class Api::V1::ItemsController < ApplicationController
     item.delete
     if item.destroy
       render(status: :created)
+    end
+  end
+
+  def find
+  items = Item.where("name ILIKE ?", "%#{params[:name]}%")
+    if items.present?
+      render(json: ItemSerializer.new(items.first))
+    else
+      render(json: { data: {} })
     end
   end
 

@@ -171,7 +171,7 @@ RSpec.describe "Items API" do
         expect(item_response[:data]).to be_a(Hash)
         expect(item_response[:data]).to have_key(:id)
     
-        expect(item_response[:data][:id].to_i).to eq(merchant.id) # Compare with merchant.id instead of item_id
+        expect(item_response[:data][:id].to_i).to eq(merchant.id) 
     
         expect(item_response[:data]).to have_key(:type)
         expect(item_response[:data][:type]).to be_a(String)
